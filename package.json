@@ -1,0 +1,75 @@
+{
+  "name": "dsh-antigravity-connect",
+  "version": "0.1.0",
+  "description": "Google Antigravity / Cloud Code Assist model provider plugin for DeepSeek Harness",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-locale"
+      ]
+    }
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "lib",
+    "bin",
+    "cordis.patch.yml",
+    "README.md",
+    "README.zh.md",
+    "LICENSE"
+  ],
+  "bin": {
+    "antigravity-connect-login": "bin/antigravity-connect-login.mjs"
+  },
+  "scripts": {
+    "check": "node --check index.js && node --check client.js && node --check bin/antigravity-connect-login.mjs && node -e \"for (const f of ['adapter','api','catalog','cloudcode','constants','credentials','oauth','preferences','serialize']) import('./lib/' + f + '.js')\"",
+    "modules:sync": "node scripts/sync-app-modules.mjs",
+    "pretest": "node scripts/check-runtime-versions.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "pack:dist": "mkdir -p dist && npm pack --pack-destination dist"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "antigravity",
+    "google",
+    "cloud-code-assist",
+    "gemini",
+    "claude",
+    "oauth",
+    "llm",
+    "provider"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@deepseek-ai/dsh-home-paths": "*",
+    "@deepseek-ai/dsh-host-webserver": "*",
+    "@deepseek-ai/dsh-llm": "*",
+    "@deepseek-ai/dsh-settings": "*",
+    "@deepseek-ai/dsh-timeout": "*",
+    "@deepseek-ai/schemastery": "*"
+  },
+  "peerDependenciesMeta": {
+    "*": {
+      "optional": true
+    }
+  }
+}

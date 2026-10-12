@@ -1,0 +1,8 @@
+# dsh-antigravity-connect bundle patch layer.
+#
+# `dsh plugin --profile web add` installs this package and reads this file to
+# mount the plugin. The entry id is the settings/TOC key; `name` must be the
+# package name so the loader can resolve it.
+- insert:
+    - id: antigravity-connect
+      name: 'dsh-antigravity-connect'
